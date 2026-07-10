@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道 2026 暑假旅遊｜主控台</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-light: #dbeafe;
+    --accent: #0891b2;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --orange: #ea580c;
+    --orange-light: #ffedd5;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --border: #e5e7eb;
+    --text: #111827;
+    --text-muted: #6b7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #0891b2 100%);
+    color: white;
+    padding: 48px 20px 56px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+  .hero .subtitle { font-size: 1rem; opacity: 0.88; margin-bottom: 18px; }
+  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .hero-badge {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .container { max-width: 1000px; margin: -28px auto 60px; padding: 0 16px; }
+
+  .stat-bar {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .stat-item { padding: 18px 10px; text-align: center; border-right: 1px solid var(--border); }
+  .stat-item:last-child { border-right: none; }
+  .stat-item .num { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+  .stat-item .lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 28px 4px 12px;
+    color: #1e3a5f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 960px) { .cards.wide { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 22px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid transparent;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.15);
+    border-color: var(--primary-light);
+  }
+  .card .icon { font-size: 1.8rem; }
+  .card .title { font-size: 1.05rem; font-weight: 700; }
+  .card .desc { font-size: 0.85rem; color: var(--text-muted); }
+  .card .tag {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-top: 4px;
+  }
+  .tag-itinerary { background: var(--primary-light); color: var(--primary); }
+  .tag-checklist { background: var(--green-light); color: var(--green); }
+  .tag-excel { background: var(--orange-light); color: var(--orange); }
+  .tag-ref { background: var(--purple-light); color: var(--purple); }
+
+  .day-strip {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 18px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .day-pill {
+    display: inline-block;
+    vertical-align: top;
+    width: 140px;
+    white-space: normal;
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-right: 10px;
+    font-size: 0.78rem;
+  }
+  .day-pill .d { font-weight: 700; color: var(--primary); font-size: 0.82rem; }
+  .day-pill .r { color: var(--text-muted); margin-top: 2px; }
+  .day-pill .h { color: var(--orange); margin-top: 4px; font-weight: 600; }
+
+  .footer-note {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 24px;
+  }
+  .map-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 16px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .map-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
+  }
+  .map-image:hover {
+    transform: scale(1.01);
+  }
+  .map-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🗾 北海道 2026 暑假旅遊</h1>
+  <div class="subtitle">7/31（五）新千歲入境 → 8/9（日）新千歲出境｜方案 B（不含函館）</div>
+  <div class="hero-badges">
+    <span class="hero-badge">👨‍👩‍👦 2大人＋1個8歲小孩</span>
+    <span class="hero-badge">🚗 8/3–8/8 租車自駕</span>
+    <span class="hero-badge">⚾ ES CON 球賽已預訂</span>
+    <span class="hero-badge">📅 共 10 天 9 夜</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="stat-bar">
+    <div class="stat-item"><div class="num">10</div><div class="lbl">天數</div></div>
+    <div class="stat-item"><div class="num">6</div><div class="lbl">住宿地點</div></div>
+    <div class="stat-item"><div class="num">2</div><div class="lbl">國家公園</div></div>
+    <div class="stat-item"><div class="num">2</div><div class="lbl">動物園＋水族館</div></div>
+  </div>
+
+  <div class="section-title">🗺️ 旅遊地圖</div>
+  <div class="map-card">
+    <a href="images/hokkaido_travel_map.jpg" target="_blank">
+      <img src="images/hokkaido_travel_map.jpg" alt="北海道手繪旅遊地圖" class="map-image">
+    </a>
+    <div class="map-desc">🎨 卡通手繪風格旅遊地圖（中日文對照），點擊地圖可查看大圖</div>
+  </div>
+
+  <div class="section-title">📁 主要文件</div>
+  <div class="cards">
+    <a class="card" href="html/方案B(不含函館)_詳細行程.html">
+      <div class="icon">🗺️</div>
+      <div class="title">詳細行程表</div>
+      <div class="desc">逐日行程、交通、景點、住宿推薦、注意事項（HTML 互動版）</div>
+      <span class="tag tag-itinerary">行程</span>
+    </a>
+    <a class="card" href="html/北海道旅遊檢查清單.html">
+      <div class="icon">✅</div>
+      <div class="title">旅遊檢查清單</div>
+      <div class="desc">機票、住宿、租車、證件、行李等出發前準備事項一覽</div>
+      <span class="tag tag-checklist">檢查清單</span>
+    </a>
+    <a class="card" href="北海道行程_檢查清單.xlsx">
+      <div class="icon">📊</div>
+      <div class="title">Excel 總表（行程＋檢查清單）</div>
+      <div class="desc">可離線編輯：行程總表（含每日住宿飯店欄）＋ 10 個檢查清單分頁</div>
+      <span class="tag tag-excel">下載 .xlsx</span>
+    </a>
+  </div>
+
+  <div class="section-title">📄 其他參考</div>
+  <div class="cards">
+    <a class="card" href="html/北海道行程_兩版本.html">
+      <div class="icon">🔀</div>
+      <div class="title">方案 A / B 兩版本比較</div>
+      <div class="desc">含函館版本 vs 不含函館版本，行程差異對照</div>
+      <span class="tag tag-ref">參考</span>
+    </a>
+    <a class="card" href="方案B(不含函館)_詳細行程.md">
+      <div class="icon">📝</div>
+      <div class="title">詳細行程（Markdown 原始檔）</div>
+      <div class="desc">純文字版本，方便複製、編輯或存到筆記軟體</div>
+      <span class="tag tag-ref">原始檔</span>
+    </a>
+    <a class="card" href="北海道旅遊檢查清單.md">
+      <div class="icon">📝</div>
+      <div class="title">檢查清單（Markdown 原始檔）</div>
+      <div class="desc">純文字版本檢查清單</div>
+      <span class="tag tag-ref">原始檔</span>
+    </a>
+  </div>
+
+  <div class="section-title">🏨 每日住宿速覽</div>
+  <div class="day-strip">
+    <span class="day-pill"><div class="d">Day1 7/31</div><div class="r">新千歲→札幌</div><div class="h">🏨 札幌</div></span>
+    <span class="day-pill"><div class="d">Day2 8/1</div><div class="r">ES CON 球賽</div><div class="h">🏨 札幌</div></span>
+    <span class="day-pill"><div class="d">Day3 8/2</div><div class="r">札幌市區</div><div class="h">🏨 札幌</div></span>
+    <span class="day-pill"><div class="d">Day4 8/3</div><div class="r">支笏湖→洞爺湖</div><div class="h">🏨 洞爺湖溫泉</div></span>
+    <span class="day-pill"><div class="d">Day5 8/4</div><div class="r">洞爺湖火山</div><div class="h">🏨 洞爺湖溫泉</div></span>
+    <span class="day-pill"><div class="d">Day6 8/5</div><div class="r">洞爺湖→小樽</div><div class="h">🏨 小樽</div></span>
+    <span class="day-pill"><div class="d">Day7 8/6</div><div class="r">旭山動物園→層雲峽</div><div class="h">🏨 層雲峽溫泉</div></span>
+    <span class="day-pill"><div class="d">Day8 8/7</div><div class="r">層雲峽→美瑛</div><div class="h">🏨 美瑛</div></span>
+    <span class="day-pill"><div class="d">Day9 8/8</div><div class="r">富良野→Outlet→札幌</div><div class="h">🏨 札幌</div></span>
+    <span class="day-pill"><div class="d">Day10 8/9</div><div class="r">札幌→新千歲出境</div><div class="h">✈️ 無住宿</div></span>
+  </div>
+
+  <div class="footer-note">最後更新：2026-07-10</div>
+
+</div>
+
+</body>
+</html>

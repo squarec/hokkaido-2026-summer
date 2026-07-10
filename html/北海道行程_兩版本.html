@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道 2026 暑假行程</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f0f4f8; color: #2d3748; }
+
+  header { background: linear-gradient(135deg, #2b6cb0, #2c7a7b); color: white; padding: 24px 20px 20px; text-align: center; }
+  header h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  header p { font-size: 0.9rem; opacity: 0.85; }
+  .badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; }
+
+  .tabs { display: flex; background: white; border-bottom: 2px solid #e2e8f0; position: sticky; top: 0; z-index: 10; }
+  .tab { flex: 1; padding: 14px; text-align: center; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: #718096; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .tab.active { color: #2b6cb0; border-bottom-color: #2b6cb0; background: #ebf8ff; }
+  .tab:hover:not(.active) { background: #f7fafc; }
+
+  .plan { display: none; padding: 16px; max-width: 800px; margin: 0 auto; }
+  .plan.active { display: block; }
+
+  .plan-header { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; border-left: 5px solid #2b6cb0; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .plan-b .plan-header { border-left-color: #38a169; }
+  .plan-header h2 { font-size: 1.1rem; color: #2b6cb0; margin-bottom: 8px; }
+  .plan-b .plan-header h2 { color: #38a169; }
+  .plan-header p { font-size: 0.85rem; color: #718096; line-height: 1.5; }
+  .highlights { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .highlight { background: #ebf8ff; color: #2b6cb0; padding: 3px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 500; }
+  .plan-b .highlight { background: #f0fff4; color: #38a169; }
+
+  .day-card { background: white; border-radius: 12px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .day-header { display: flex; align-items: center; padding: 12px 16px; gap: 12px; cursor: pointer; user-select: none; }
+  .day-num { background: #2b6cb0; color: white; border-radius: 8px; padding: 4px 10px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; min-width: 54px; text-align: center; }
+  .plan-b .day-num { background: #38a169; }
+  .day-title { flex: 1; }
+  .day-title .date { font-weight: 700; font-size: 0.95rem; }
+  .day-title .place { font-size: 0.82rem; color: #718096; margin-top: 1px; }
+  .day-chevron { color: #a0aec0; font-size: 0.8rem; transition: transform 0.2s; }
+  .day-card.open .day-chevron { transform: rotate(180deg); }
+
+  .day-body { display: none; border-top: 1px solid #f0f4f8; }
+  .day-card.open .day-body { display: block; }
+
+  .segment { display: flex; padding: 12px 16px; gap: 12px; border-bottom: 1px solid #f7fafc; }
+  .segment:last-child { border-bottom: none; }
+  .seg-icon { font-size: 1.2rem; width: 28px; text-align: center; flex-shrink: 0; margin-top: 2px; }
+  .seg-info { flex: 1; }
+  .seg-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 3px; }
+  .seg-detail { font-size: 0.82rem; color: #718096; line-height: 1.5; }
+  .seg-meta { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+  .meta-tag { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2px 8px; font-size: 0.75rem; color: #4a5568; }
+  .meta-tag.time { color: #2b6cb0; background: #ebf8ff; border-color: #bee3f8; }
+  .meta-tag.cost { color: #d69e2e; background: #fffff0; border-color: #faf089; }
+  .meta-tag.note { color: #c53030; background: #fff5f5; border-color: #fed7d7; }
+
+  .special { background: linear-gradient(to right, #fffbeb, #fefce8); }
+  .special .seg-title { color: #b7791f; }
+
+  .compare { padding: 16px; max-width: 800px; margin: 0 auto; }
+  .compare-card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .compare-card h3 { font-size: 1rem; margin-bottom: 12px; color: #4a5568; }
+  .compare-row { display: flex; border-bottom: 1px solid #f0f4f8; padding: 8px 0; align-items: center; gap: 8px; }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-label { flex: 1; font-size: 0.85rem; color: #4a5568; }
+  .compare-a, .compare-b { width: 100px; text-align: center; font-size: 0.82rem; font-weight: 500; }
+  .compare-a { color: #2b6cb0; }
+  .compare-b { color: #38a169; }
+  .col-header { font-weight: 700; font-size: 0.82rem; padding: 0 0 8px; border-bottom: 2px solid #e2e8f0; }
+
+  footer { text-align: center; padding: 20px; font-size: 0.78rem; color: #a0aec0; }
+
+  @media (max-width: 500px) {
+    header h1 { font-size: 1.3rem; }
+    .tab { font-size: 0.8rem; padding: 12px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🗾 北海道 2026 暑假</h1>
+  <p>7/31（五）抵達 → 8/9（日）出發｜10天9夜</p>
+  <div class="badges">
+    <span class="badge">👨‍👩‍👧 2大1小（8歲）</span>
+    <span class="badge">🚗 8/3起租車</span>
+    <span class="badge">⚾ 8/1 ES CON 已預訂</span>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPlan('a')">📍 方案 A<br><small>含函館</small></div>
+  <div class="tab" onclick="showPlan('b')">🌿 方案 B<br><small>不去函館</small></div>
+  <div class="tab" onclick="showPlan('compare')">⚖️ 比較</div>
+</div>
+
+<!-- ===== 方案 A ===== -->
+<div class="plan plan-a active" id="plan-a">
+  <div class="plan-header">
+    <h2>✅ 方案 A：含函館</h2>
+    <p>涵蓋函館夜景、朝市、五稜郭，行程跨越北海道南北，風景豐富多元。支笏湖安排在最後一天順路還車。</p>
+    <div class="highlights">
+      <span class="highlight">🌃 函館夜景</span>
+      <span class="highlight">🐟 小樽水族館</span>
+      <span class="highlight">🦁 旭山動物園</span>
+      <span class="highlight">🐻 圓山動物園</span>
+      <span class="highlight">🏞️ 支笏洞爺國家公園</span>
+    </div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 1</div>
+      <div class="day-title">
+        <div class="date">7/31（五）</div>
+        <div class="place">新千歲 → 札幌</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">✈️</div>
+        <div class="seg-info">
+          <div class="seg-title">抵達新千歲機場</div>
+          <div class="seg-detail">10:00 落地，過海關行李提領</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">JR 快速エアポート → 札幌</div>
+          <div class="seg-detail">新千歲機場站搭乘，直達札幌</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 約37分</span>
+            <span class="meta-tag cost">💴 ¥1,150/人</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏙️</div>
+        <div class="seg-info">
+          <div class="seg-title">札幌市區</div>
+          <div class="seg-detail">時計台・大通公園・狸小路商店街・晚餐（味噌拉麵或海鮮）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 2</div>
+      <div class="day-title">
+        <div class="date">8/1（六）</div>
+        <div class="place">札幌 → ES CON Field</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment special">
+        <div class="seg-icon">⚾</div>
+        <div class="seg-info">
+          <div class="seg-title">ES CON Field 看球賽（已預訂）</div>
+          <div class="seg-detail">北海道日本火腿鬥士主場・提前確認開賽時間</div>
+          <div class="seg-meta"><span class="meta-tag note">📌 已預訂</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">JR → 北広島站 → 接駁巴士</div>
+          <div class="seg-detail">札幌站搭 JR 千歲線到北広島，再搭球場接駁巴士</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 約18分</span>
+            <span class="meta-tag cost">💴 ¥330/人</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 3</div>
+      <div class="day-title">
+        <div class="date">8/2（日）</div>
+        <div class="place">札幌市區</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🐻</div>
+        <div class="seg-info">
+          <div class="seg-title">圓山動物園</div>
+          <div class="seg-detail">北海道棕熊・北極熊・企鵝館・適合孩子全日遊</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 推薦3-4小時</span>
+            <span class="meta-tag cost">💴 ¥800 大人 / ¥400 小孩</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">⛩️</div>
+        <div class="seg-info">
+          <div class="seg-title">北海道神宮・中島公園</div>
+          <div class="seg-detail">下午散步參觀，晚餐薄野夜市</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 4</div>
+      <div class="day-title">
+        <div class="date">8/3（一）🚗 租車出發</div>
+        <div class="place">札幌 → 小樽 → 旭川</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment special">
+        <div class="seg-icon">🚗</div>
+        <div class="seg-info">
+          <div class="seg-title">札幌市區取車</div>
+          <div class="seg-detail">建議租 SUV，記得加裝兒童座椅，加滿油出發</div>
+          <div class="seg-meta"><span class="meta-tag note">📌 記得帶國際駕照</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🐬</div>
+        <div class="seg-info">
+          <div class="seg-title">小樽水族館</div>
+          <div class="seg-detail">海豹・海豚・企鵝遊行，小朋友最愛</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 開車45分</span>
+            <span class="meta-tag cost">💴 ¥1,800 大人 / ¥700 小孩</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏮</div>
+        <div class="seg-info">
+          <div class="seg-title">小樽運河・北一硝子</div>
+          <div class="seg-detail">午餐壽司・玻璃工藝品・運河散步</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 停留約2小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🛣️</div>
+        <div class="seg-info">
+          <div class="seg-title">開車前往旭川</div>
+          <div class="seg-detail">走道央自動車道，沿途風景壯闊</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約2.5小時</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 5</div>
+      <div class="day-title">
+        <div class="date">8/4（二）</div>
+        <div class="place">旭川 → 美瑛</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🦁</div>
+        <div class="seg-info">
+          <div class="seg-title">旭山動物園（上午）</div>
+          <div class="seg-detail">企鵝散步・北極熊水中游泳・猩猩空中步道，日本最知名動物園</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 開車5分 / 推薦3小時</span>
+            <span class="meta-tag cost">💴 ¥1,000 大人 / 免費（中學以下）</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🌊</div>
+        <div class="seg-info">
+          <div class="seg-title">美瑛 青池</div>
+          <div class="seg-detail">神秘藍綠色湖水・白樺林倒影</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 開車30分</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🌸</div>
+        <div class="seg-info">
+          <div class="seg-title">四季彩之丘・拼布之路</div>
+          <div class="seg-detail">彩色花田山丘・丘陵間的農田風景道路</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 6</div>
+      <div class="day-title">
+        <div class="date">8/5（三）</div>
+        <div class="place">美瑛 → 富良野 → 洞爺湖</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">💜</div>
+        <div class="seg-info">
+          <div class="seg-title">富良野薰衣草田</div>
+          <div class="seg-detail">Farm Tomita・薰衣草冰淇淋・花田攝影</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 開車30分 / 停留2小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🛣️</div>
+        <div class="seg-info">
+          <div class="seg-title">南下前往洞爺湖</div>
+          <div class="seg-detail">道央自動車道南下，抵達洞爺湖</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約2.5小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">♨️</div>
+        <div class="seg-info">
+          <div class="seg-title">洞爺湖溫泉旅館</div>
+          <div class="seg-detail">湖畔溫泉・晚間煙火（每晚20:45，4月-10月）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 7</div>
+      <div class="day-title">
+        <div class="date">8/6（四）</div>
+        <div class="place">洞爺湖 → 函館</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🌋</div>
+        <div class="seg-info">
+          <div class="seg-title">洞爺湖遊覽船・火山博物館</div>
+          <div class="seg-detail">中島湖上巡遊・昭和新山・有珠山噴火歷史展覽</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 上午停留3小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🛣️</div>
+        <div class="seg-info">
+          <div class="seg-title">開車前往函館</div>
+          <div class="seg-detail">道央道→道南道，沿途可見太平洋海景</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約2.5小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">⭐</div>
+        <div class="seg-info">
+          <div class="seg-title">五稜郭公園</div>
+          <div class="seg-detail">日本首個西洋式星型城廓・五稜郭塔瞭望</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🌃</div>
+        <div class="seg-info">
+          <div class="seg-title">函館山夜景</div>
+          <div class="seg-detail">日本三大夜景之一，建議搭纜車（20分），或自駕上山</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 日落後約1小時</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 8</div>
+      <div class="day-title">
+        <div class="date">8/7（五）</div>
+        <div class="place">函館</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🦞</div>
+        <div class="seg-info">
+          <div class="seg-title">函館朝市（早餐）</div>
+          <div class="seg-detail">海膽丼・毛蟹・花枝・帆立貝，早上6點開市</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 06:00-08:00</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏛️</div>
+        <div class="seg-info">
+          <div class="seg-title">元町西洋館街</div>
+          <div class="seg-detail">舊英國領事館・東正教會・坂道街景</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🧱</div>
+        <div class="seg-info">
+          <div class="seg-title">金森紅磚倉庫</div>
+          <div class="seg-detail">購物・咖啡・港口散步</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 9</div>
+      <div class="day-title">
+        <div class="date">8/8（六）</div>
+        <div class="place">函館 → 支笏湖 → 札幌</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🏞️</div>
+        <div class="seg-info">
+          <div class="seg-title">支笏湖（支笏洞爺國家公園）</div>
+          <div class="seg-detail">日本最北不凍湖・透明度超高・獨木舟・水中步道</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 函館出發→支笏湖約3小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚗</div>
+        <div class="seg-info">
+          <div class="seg-title">支笏湖 → 札幌還車</div>
+          <div class="seg-detail">支笏湖往札幌約50分</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約50分</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 10 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 10</div>
+      <div class="day-title">
+        <div class="date">8/9（日）</div>
+        <div class="place">札幌 → 新千歲 ✈️</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🛍️</div>
+        <div class="seg-info">
+          <div class="seg-title">早上購物・伴手禮</div>
+          <div class="seg-detail">六花亭・白色戀人・北海道限定商品</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">JR 前往新千歲機場</div>
+          <div class="seg-detail">建議13:00前抵達機場</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 37分</span>
+            <span class="meta-tag note">✈️ 15:00 出發</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 方案 B ===== -->
+<div class="plan plan-b" id="plan-b">
+  <div class="plan-header">
+    <h2>🌿 方案 B：不去函館</h2>
+    <p>省下往返函館約5小時車程，改加大雪山國家公園，支笏湖與洞爺湖停留更從容，整體行程壓力小。</p>
+    <div class="highlights">
+      <span class="highlight">🏔️ 大雪山國家公園</span>
+      <span class="highlight">🏞️ 支笏洞爺國家公園</span>
+      <span class="highlight">🐟 小樽水族館</span>
+      <span class="highlight">🦁 旭山動物園</span>
+      <span class="highlight">🐻 圓山動物園</span>
+    </div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 1</div>
+      <div class="day-title">
+        <div class="date">7/31（五）</div>
+        <div class="place">新千歲 → 札幌</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">✈️</div>
+        <div class="seg-info">
+          <div class="seg-title">抵達新千歲機場</div>
+          <div class="seg-detail">10:00 落地，過海關行李提領</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">JR 快速エアポート → 札幌</div>
+          <div class="seg-detail">新千歲機場站直達札幌</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 約37分</span>
+            <span class="meta-tag cost">💴 ¥1,150/人</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏙️</div>
+        <div class="seg-info">
+          <div class="seg-title">札幌市區</div>
+          <div class="seg-detail">時計台・大通公園・狸小路・晚餐味噌拉麵</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 2</div>
+      <div class="day-title">
+        <div class="date">8/1（六）</div>
+        <div class="place">札幌 → ES CON Field</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment special">
+        <div class="seg-icon">⚾</div>
+        <div class="seg-info">
+          <div class="seg-title">ES CON Field 看球賽（已預訂）</div>
+          <div class="seg-detail">北海道日本火腿鬥士主場</div>
+          <div class="seg-meta"><span class="meta-tag note">📌 已預訂</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">JR → 北広島站 → 接駁巴士</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 約18分</span>
+            <span class="meta-tag cost">💴 ¥330/人</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 3</div>
+      <div class="day-title">
+        <div class="date">8/2（日）</div>
+        <div class="place">札幌市區</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🐻</div>
+        <div class="seg-info">
+          <div class="seg-title">圓山動物園</div>
+          <div class="seg-detail">棕熊・北極熊・企鵝・適合孩子全日遊</div>
+          <div class="seg-meta"><span class="meta-tag cost">💴 ¥800 大人 / ¥400 小孩</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">⛩️</div>
+        <div class="seg-info">
+          <div class="seg-title">北海道神宮・中島公園</div>
+          <div class="seg-detail">下午散步，薄野晚餐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 4</div>
+      <div class="day-title">
+        <div class="date">8/3（一）🚗 租車出發</div>
+        <div class="place">札幌 → 支笏湖 → 洞爺湖</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment special">
+        <div class="seg-icon">🚗</div>
+        <div class="seg-info">
+          <div class="seg-title">札幌市區取車</div>
+          <div class="seg-detail">建議租 SUV，記得加裝兒童座椅</div>
+          <div class="seg-meta"><span class="meta-tag note">📌 記得帶國際駕照</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏞️</div>
+        <div class="seg-info">
+          <div class="seg-title">支笏湖（支笏洞爺國家公園）</div>
+          <div class="seg-detail">日本最北不凍湖・獨木舟・水中步道・午餐湖畔</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 開車約1小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">♨️</div>
+        <div class="seg-info">
+          <div class="seg-title">洞爺湖温泉旅館</div>
+          <div class="seg-detail">下午抵達、湖畔溫泉・夜間煙火（20:45）</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 支笏湖→洞爺湖約1小時</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 5</div>
+      <div class="day-title">
+        <div class="date">8/4（二）</div>
+        <div class="place">洞爺湖</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🚢</div>
+        <div class="seg-info">
+          <div class="seg-title">洞爺湖遊覽船</div>
+          <div class="seg-detail">中島巡遊・蝦夷鹿觀察</div>
+          <div class="seg-meta"><span class="meta-tag cost">💴 ¥1,500 大人 / ¥750 小孩</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🌋</div>
+        <div class="seg-info">
+          <div class="seg-title">昭和新山・有珠山纜車</div>
+          <div class="seg-detail">登山纜車俯瞰洞爺湖・火山口步道</div>
+          <div class="seg-meta"><span class="meta-tag cost">💴 纜車 ¥1,800/人（來回）</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏛️</div>
+        <div class="seg-info">
+          <div class="seg-title">火山博物館</div>
+          <div class="seg-detail">有珠山噴火歷史・熔岩標本・孩子喜歡</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 6</div>
+      <div class="day-title">
+        <div class="date">8/5（三）</div>
+        <div class="place">洞爺湖 → 小樽 → 旭川</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🐬</div>
+        <div class="seg-info">
+          <div class="seg-title">小樽水族館</div>
+          <div class="seg-detail">海豹・海豚・企鵝遊行・親子必去</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 洞爺湖→小樽約2小時</span>
+            <span class="meta-tag cost">💴 ¥1,800 大人 / ¥700 小孩</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏮</div>
+        <div class="seg-info">
+          <div class="seg-title">小樽運河・午餐</div>
+          <div class="seg-detail">運河散步・壽司・北菓楼甜點</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🛣️</div>
+        <div class="seg-info">
+          <div class="seg-title">開車前往旭川</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約2小時</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 7</div>
+      <div class="day-title">
+        <div class="date">8/6（四）</div>
+        <div class="place">旭川 → 層雲峽</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🦁</div>
+        <div class="seg-info">
+          <div class="seg-title">旭山動物園（上午）</div>
+          <div class="seg-detail">企鵝散步・北極熊水中游泳・猩猩空中步道</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 推薦3小時</span>
+            <span class="meta-tag cost">💴 ¥1,000 大人 / 免費（中學以下）</span>
+          </div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🏔️</div>
+        <div class="seg-info">
+          <div class="seg-title">層雲峽（大雪山國家公園）</div>
+          <div class="seg-detail">黑岳纜車・步道健行・柱狀玄武岩峽谷</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 開車約2小時</span>
+            <span class="meta-tag cost">💴 纜車 ¥2,000/人（來回）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 8</div>
+      <div class="day-title">
+        <div class="date">8/7（五）</div>
+        <div class="place">層雲峽 → 美瑛</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">💧</div>
+        <div class="seg-info">
+          <div class="seg-title">流星・銀河瀑布</div>
+          <div class="seg-detail">層雲峽兩大瀑布・早晨清涼散步</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🌊</div>
+        <div class="seg-info">
+          <div class="seg-title">美瑛 青池</div>
+          <div class="seg-detail">神秘藍綠色湖水</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 開車約1.5小時</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🌸</div>
+        <div class="seg-info">
+          <div class="seg-title">四季彩之丘・拼布之路</div>
+          <div class="seg-detail">彩色花田・丘陵間農田風景</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 9</div>
+      <div class="day-title">
+        <div class="date">8/8（六）</div>
+        <div class="place">美瑛 → 富良野 → 札幌</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">💜</div>
+        <div class="seg-info">
+          <div class="seg-title">富良野薰衣草田</div>
+          <div class="seg-detail">Farm Tomita・薰衣草冰淇淋・花田拍照</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約30分</span></div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚗</div>
+        <div class="seg-info">
+          <div class="seg-title">富良野 → 札幌還車</div>
+          <div class="seg-detail">道央自動車道北上</div>
+          <div class="seg-meta"><span class="meta-tag time">⏱ 約2小時</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 10 -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">Day 10</div>
+      <div class="day-title">
+        <div class="date">8/9（日）</div>
+        <div class="place">札幌 → 新千歲 ✈️</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="seg-icon">🛍️</div>
+        <div class="seg-info">
+          <div class="seg-title">早上悠閒購物</div>
+          <div class="seg-detail">六花亭・白色戀人・北海道限定伴手禮</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">JR 前往新千歲機場</div>
+          <div class="seg-meta">
+            <span class="meta-tag time">⏱ 37分</span>
+            <span class="meta-tag note">✈️ 15:00 出發</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 比較 ===== -->
+<div class="plan" id="plan-compare">
+  <div class="compare">
+    <div class="compare-card">
+      <h3>📊 兩方案比較</h3>
+      <div class="compare-row col-header">
+        <div class="compare-label"></div>
+        <div class="compare-a">方案 A<br>含函館</div>
+        <div class="compare-b">方案 B<br>不去函館</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🌃 函館夜景・朝市・五稜郭</div>
+        <div class="compare-a">✅</div>
+        <div class="compare-b">❌</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🏔️ 大雪山國家公園</div>
+        <div class="compare-a">❌</div>
+        <div class="compare-b">✅</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🏞️ 支笏洞爺國家公園</div>
+        <div class="compare-a">✅（支笏湖較趕）</div>
+        <div class="compare-b">✅（更從容）</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🌋 洞爺湖停留時間</div>
+        <div class="compare-a">半天</div>
+        <div class="compare-b">一整天</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🐟 水族館</div>
+        <div class="compare-a">小樽（1個）</div>
+        <div class="compare-b">小樽（1個）</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🐾 動物園</div>
+        <div class="compare-a">旭山＋圓山（2個）</div>
+        <div class="compare-b">旭山＋圓山（2個）</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">🌸 美瑛・富良野</div>
+        <div class="compare-a">✅</div>
+        <div class="compare-b">✅</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">行程壓力</div>
+        <div class="compare-a">普通</div>
+        <div class="compare-b">較輕鬆</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-label">最適合</div>
+        <div class="compare-a">首次北海道、想打卡函館</div>
+        <div class="compare-b">喜歡自然、親子健行</div>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <h3>📌 共同注意事項</h3>
+      <div class="segment">
+        <div class="seg-icon">⚾</div>
+        <div class="seg-info">
+          <div class="seg-title">ES CON Field</div>
+          <div class="seg-detail">8/1（六）已預訂，從札幌搭 JR 千歲線到北広島站（18分），再搭接駁巴士</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚗</div>
+        <div class="seg-info">
+          <div class="seg-title">租車</div>
+          <div class="seg-detail">8/3（一）在札幌市區取車，8/8 還車。建議租 SUV，提前加裝 1 個兒童安全座椅（8歲可用）。攜帶台灣駕照＋國際駕照。</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">🚃</div>
+        <div class="seg-info">
+          <div class="seg-title">7/31–8/2 無車期間</div>
+          <div class="seg-detail">以 JR・地下鐵・市區巴士為主，可考慮購買 SAPICA 交通卡</div>
+        </div>
+      </div>
+      <div class="segment">
+        <div class="seg-icon">💴</div>
+        <div class="seg-info">
+          <div class="seg-title">JR Pass 建議</div>
+          <div class="seg-detail">無車期間移動不多，不一定需要 Hokkaido Rail Pass。方案 A 若函館段搭 JR 才需評估（特急北斗來回約 ¥19,000）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>北海道 2026 暑假行程 ｜ 2大1小・7/31–8/9</footer>
+
+<script>
+function showPlan(name) {
+  document.querySelectorAll('.plan').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('plan-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleDay(card) {
+  card.classList.toggle('open');
+}
+
+// Open first card of each plan by default
+document.querySelectorAll('.plan').forEach(plan => {
+  const first = plan.querySelector('.day-card');
+  if (first) first.classList.add('open');
+});
+</script>
+</body>
+</html>

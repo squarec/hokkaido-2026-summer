@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道 2026 暑假｜方案 B 詳細行程（不含函館）</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-light: #dbeafe;
+    --accent: #0891b2;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --orange: #ea580c;
+    --orange-light: #ffedd5;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --red: #dc2626;
+    --yellow: #ca8a04;
+    --yellow-light: #fef9c3;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --border: #e5e7eb;
+    --text: #111827;
+    --text-muted: #6b7280;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #0891b2 100%);
+    color: white;
+    padding: 40px 20px 50px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 6px; }
+  .hero .subtitle { font-size: 1rem; opacity: 0.85; margin-bottom: 20px; }
+  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .hero-badge {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* ── Quick Summary Bar ── */
+  .summary-bar {
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 0;
+  }
+  .summary-item {
+    padding: 14px 10px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .summary-item:last-child { border-right: none; }
+  .summary-item .num { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+  .summary-item .lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Nav Pills ── */
+  .nav-wrap {
+    background: white;
+    padding: 10px 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .nav-wrap a {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-right: 4px;
+    transition: all 0.2s;
+  }
+  .nav-wrap a:hover { background: var(--primary-light); color: var(--primary); }
+
+  /* ── Main Layout ── */
+  .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  /* ── Day Card ── */
+  .day-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .day-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .day-num {
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1.1;
+    text-align: center;
+  }
+  .day-title { flex: 1; }
+  .day-title h2 { font-size: 1.05rem; font-weight: 700; }
+  .day-title .day-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+  .day-transport {
+    background: var(--gray-light);
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .day-transport strong { color: var(--text); }
+
+  /* ── Schedule Table ── */
+  .schedule { padding: 0 20px 4px; }
+  .schedule-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .schedule-row:last-child { border-bottom: none; }
+  .time-col {
+    width: 56px;
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary);
+    padding-top: 1px;
+  }
+  .event-col { flex: 1; font-size: 0.88rem; line-height: 1.5; }
+  .event-col strong { font-weight: 600; }
+  .event-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .tag-food    { background: #fef3c7; color: #92400e; }
+  .tag-sight   { background: #dbeafe; color: #1e40af; }
+  .tag-hotel   { background: #f3e8ff; color: #6b21a8; }
+  .tag-move    { background: #f0fdf4; color: #166534; }
+  .tag-special { background: #fce7f3; color: #9d174d; }
+  .tag-nature  { background: #ecfdf5; color: #065f46; }
+
+  /* ── Tips Box ── */
+  .tips-box {
+    margin: 0 20px 16px;
+    background: var(--yellow-light);
+    border-left: 4px solid #ca8a04;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  .tips-box .tips-title { font-weight: 700; color: #854d0e; margin-bottom: 4px; }
+
+  /* ── Hotel Block ── */
+  .hotel-block {
+    margin: 0 20px 16px;
+    background: var(--purple-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+  }
+  .hotel-block .hotel-title { font-weight: 700; color: var(--purple); margin-bottom: 4px; }
+
+  /* ── Highlight Pill (special events) ── */
+  .highlight-row {
+    background: linear-gradient(90deg, #fdf2f8, #ede9fe);
+  }
+
+  /* ── Sections: Summary Tables ── */
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+  }
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f9fafb; }
+
+  /* ── Warning Cards ── */
+  .warn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .warn-card {
+    background: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    border-left: 4px solid var(--orange);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .warn-card .warn-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--orange);
+  }
+  .warn-card p { color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+  .warn-card strong { color: var(--text); }
+
+  /* ── Cost Table ── */
+  .cost-table td:last-child { font-weight: 600; color: var(--green); text-align: right; }
+
+  /* ── Firework Banner ── */
+  .firework-banner {
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    color: white;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .firework-banner .fw-icon { font-size: 2rem; flex-shrink: 0; }
+  .firework-banner strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+
+  @media (max-width: 560px) {
+    .warn-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.4rem; }
+    .summary-bar { grid-template-columns: repeat(3, 1fr); }
+    .summary-item .num { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>🏔️ 北海道 2026 暑假</h1>
+  <div class="subtitle">方案 B・不去函館版・大雪山完全制覇</div>
+  <div class="hero-badges">
+    <span class="hero-badge">📅 7/31 – 8/9</span>
+    <span class="hero-badge">👨‍👩‍👦 2大1小</span>
+    <span class="hero-badge">🚗 租車 8/3–8/8</span>
+    <span class="hero-badge">⚾ ES CON 已預訂</span>
+    <span class="hero-badge">🏔️ 2座國家公園</span>
+  </div>
+  <a href="../北海道行程.html" style="display:inline-block;margin-top:16px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:5px 16px;font-size:0.82rem;color:white;text-decoration:none;">← 回主控台</a>
+</div>
+
+<!-- Summary Bar -->
+<div class="summary-bar">
+  <div class="summary-item"><div class="num">10</div><div class="lbl">天 9 夜</div></div>
+  <div class="summary-item"><div class="num">2</div><div class="lbl">動物園</div></div>
+  <div class="summary-item"><div class="num">2</div><div class="lbl">國家公園</div></div>
+</div>
+
+<!-- Nav -->
+<div class="nav-wrap">
+  <a href="#map-section">🗺️ 地圖</a>
+  <a href="#d1">7/31</a>
+  <a href="#d2">8/1 ⚾</a>
+  <a href="#d3">8/2 🐻</a>
+  <a href="#d4">8/3 🚗</a>
+  <a href="#d5">8/4 🌋</a>
+  <a href="#d6">8/5 🐬</a>
+  <a href="#d7">8/6 🦁</a>
+  <a href="#d8">8/7 🏔️</a>
+  <a href="#d9">8/8 💜</a>
+  <a href="#d10">8/9 ✈️</a>
+  <a href="#summary">總覽</a>
+</div>
+
+<div class="container">
+
+<!-- Map Section -->
+<div class="section-title" id="map-section">🗺️ 旅遊地圖 Map</div>
+<div style="background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 18px; margin-bottom: 24px; text-align: center;">
+  <a href="../images/hokkaido_travel_map.jpg" target="_blank">
+    <img src="../images/hokkaido_travel_map.jpg" alt="北海道手繪旅遊地圖" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease; cursor: zoom-in;">
+  </a>
+  <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px;">🎨 卡通手繪風格路線圖（中日雙語標記）｜自駕自助手冊專屬</p>
+</div>
+
+<!-- ══════════════════════════════════ DAY 1 ══════════════════════════════════ -->
+<div class="day-card" id="d1">
+  <div class="day-header">
+    <div class="day-num">Day<br>1</div>
+    <div class="day-title">
+      <h2>新千歲 → 札幌</h2>
+      <div class="day-meta">7/31（五）・抵達日</div>
+    </div>
+  </div>
+  <div class="day-transport">🚃 <strong>JR 快速エアポート</strong>｜新千歲 → 札幌 約 37 分（建議買指定席）</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">10:00</div>
+      <div class="event-col">✈️ 抵達新千歲機場，入境・領行李（預留 1–1.5h）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">11:30</div>
+      <div class="event-col"><span class="event-tag tag-move">交通</span>搭 JR 快速エアポート → 札幌站</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:15</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>抵達札幌站，飯店寄放行李</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:00</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>🍜 <strong>札幌拉麵橫丁</strong>｜推薦「すみれ」味噌拉麵</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🏛️ <strong>時計台</strong>（外觀拍照，入內¥200/人）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🌳 <strong>大通公園</strong>｜夏季啤酒園（Sapporo Summer Fest，7月底仍舉辦中）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">16:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">逛街</span>🛍️ <strong>狸小路商店街</strong>｜藥妝・伴手禮・街頭美食</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:00</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>飯店 Check-in</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:30</div>
+      <div class="event-col"><span class="event-tag tag-food">晚餐</span>🦀 <strong>根室花まる</strong>（回転壽司，建議網路取號）或すすきの 海鮮居酒屋</div>
+    </div>
+  </div>
+  <div class="hotel-block">
+    <div class="hotel-title">🏨 住宿｜札幌（3晚）</div>
+    JR Inn 札幌站前 / Cross Hotel Sapporo / Richmond Hotel 札幌
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 2 ══════════════════════════════════ -->
+<div class="day-card" id="d2">
+  <div class="day-header">
+    <div class="day-num" style="background:#dc2626">Day<br>2</div>
+    <div class="day-title">
+      <h2>⚾ ES CON Field 看球賽</h2>
+      <div class="day-meta">8/1（六）・北海道日本火腿 主場戰</div>
+    </div>
+  </div>
+  <div class="day-transport">🚃 <strong>JR 千歳線</strong>｜札幌 → 北広島（約 18 分）→ 接駁巴士</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">08:30</div>
+      <div class="event-col">飯店早餐</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">09:30</div>
+      <div class="event-col">便利店備糧・確認球票資訊</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">11:00</div>
+      <div class="event-col"><span class="event-tag tag-move">交通</span>搭 JR → 北広島站 → 接駁巴士至 ES CON</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">12:00</div>
+      <div class="event-col">🏟️ <strong>ES CON Field 北海道</strong>｜入場探索球場・F Village 周邊商業設施</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:00</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>球場內美食（海鮮丼・北海道ソフトクリーム 等）</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">球賽</div>
+      <div class="event-col">⚾ <strong>北海道日本火腿戦士 主場（已預訂）</strong>｜確認票面開賽時間</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">賽後</div>
+      <div class="event-col"><span class="event-tag tag-move">交通</span>接駁巴士 → 北広島站 → JR → 札幌</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">晚餐</div>
+      <div class="event-col"><span class="event-tag tag-food">晚餐</span>回到すすきの 覓食，或大通公園啤酒園</div>
+    </div>
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">⚾ 球場小提醒</div>
+    帶小孩入場建議準備耳塞（現場聲音大）。F Village 有大型商業設施，帶小孩逛也很適合。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 3 ══════════════════════════════════ -->
+<div class="day-card" id="d3">
+  <div class="day-header">
+    <div class="day-num" style="background:#16a34a">Day<br>3</div>
+    <div class="day-title">
+      <h2>🐻 圓山動物園・北海道神宮</h2>
+      <div class="day-meta">8/2（日）・札幌市內</div>
+    </div>
+  </div>
+  <div class="day-transport">🚌 <strong>市內巴士</strong>｜圓山公園站（東西線）</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">09:00</div>
+      <div class="event-col"><span class="event-tag tag-nature">動物園</span>🐻 <strong>圓山動物園</strong>（09:00開園）｜北極熊・企鵝・紅毛猩猩｜¥600/大人・¥300/小孩</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:00</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>動物園內餐廳或旁邊小食堂</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🌲 <strong>北海道神宮</strong>（步行約 5 分）｜莊嚴氣氛，順便祈福</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">逛街</span>搭巴士回市區 → <strong>札幌工廠（Sapporo Factory）</strong>｜親子商場，有星巴克</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">16:00</div>
+      <div class="event-col">💊 藥妝掃貨（マツキヨ・コスモス），為後續行程補充</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">17:30</div>
+      <div class="event-col">🧳 飯店整理行李（明天租車出發，行李預先整理好）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:30</div>
+      <div class="event-col"><span class="event-tag tag-food">晚餐</span>🐑 <strong>ジンギスカン（成吉思汗烤羊）</strong>｜札幌名物，推薦「だるま」本店</div>
+    </div>
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">🚗 明天出發提醒</div>
+    確認租車公司位置與開門時間。通常 08:00–09:00 開始取車，建議選靠近飯店的門市。記得攜帶駕照＋日文翻譯本（台灣駕照需附翻譯，非國際駕照）。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 4 ══════════════════════════════════ -->
+<div class="day-card" id="d4">
+  <div class="day-header">
+    <div class="day-num" style="background:#0891b2">Day<br>4</div>
+    <div class="day-title">
+      <h2>🚗 租車出發｜支笏湖 → 洞爺湖</h2>
+      <div class="day-meta">8/3（一）・支笏洞爺國家公園</div>
+    </div>
+  </div>
+  <div class="day-transport">🚗 <strong>自駕</strong>｜札幌 → 支笏湖 約 40 分 / 支笏湖 → 洞爺湖 約 65 分</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">08:30</div>
+      <div class="event-col"><span class="event-tag tag-move">取車</span>飯店退房，前往租車公司取車（建議 Toyota/Nissan，預訂 SUV＋兒童座椅）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">09:30</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往支笏湖（道東自動車道）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:15</div>
+      <div class="event-col"><span class="event-tag tag-nature">國家公園</span>🏞️ 抵達<strong>支笏湖</strong>（支笏洞爺國家公園）</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">10:30</div>
+      <div class="event-col"><span class="event-tag tag-nature">體驗</span>🛶 <strong>獨木舟體驗</strong>｜湖水透明度極高，可見湖底！約 1.5–2h｜¥5,000–7,000/人<br><small style="color:#dc2626">⚠️ 需提前網路預約，推薦：支笏湖ネイチャーセンター</small></div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:30</div>
+      <div class="event-col"><span class="event-tag tag-nature">體驗</span>🐟 <strong>水中遊覽船</strong>｜玻璃底船看水中魚類，小孩超感興趣｜¥1,500/大人</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:30</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>支笏湖溫泉街小餐廳｜推薦鮭魚丼或支笏湖定食</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:30</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往洞爺湖（約 65 分）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">16:00</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>抵達洞爺湖，溫泉旅館 Check-in</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">17:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🚢 <strong>洞爺湖遊覽船</strong>｜約 50 分，¥1,500/大人（若趕上末班船）</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">20:45</div>
+      <div class="event-col">🎆 <strong>洞爺湖湖畔煙火大會</strong>｜每晚固定施放，站飯店湖畔即可欣賞！約 20 分鐘</div>
+    </div>
+  </div>
+  <div class="firework-banner">
+    <div class="fw-icon">🎆</div>
+    <div>
+      <strong>洞爺湖夏季煙火（每晚！）</strong>
+      每年 4 月下旬到 10 月下旬，每晚 20:45 固定施放約 20 分鐘。住湖畔旅館直接從房間或露台欣賞，是北海道最獨特的溫泉煙火體驗。
+    </div>
+  </div>
+  <div class="hotel-block">
+    <div class="hotel-title">🏨 住宿｜洞爺湖溫泉（2晚）</div>
+    湖畔亭 / 望羊蹄 / Toya Manseikaku｜建議選有湖景房＋附早晚餐方案
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 5 ══════════════════════════════════ -->
+<div class="day-card" id="d5">
+  <div class="day-header">
+    <div class="day-num" style="background:#7c3aed">Day<br>5</div>
+    <div class="day-title">
+      <h2>🌋 洞爺湖・有珠山・火山全日遊</h2>
+      <div class="day-meta">8/4（二）・洞爺湖留宿</div>
+    </div>
+  </div>
+  <div class="day-transport">🚗 <strong>洞爺湖周邊自駕</strong>｜昭和新山約 20 分</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">07:30</div>
+      <div class="event-col">🍱 旅館早餐（溫泉旅館通常附早餐）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">09:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🚢 <strong>洞爺湖遊覧船</strong>｜中島上有蝦夷鹿，湖景優美｜¥1,500/大人</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:00</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>前往昭和新山（開車約 20 分）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:20</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🌋 <strong>昭和新山</strong>｜1944 年火山噴發形成，可在外觀看壯觀的熔岩丘</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:30</div>
+      <div class="event-col"><span class="event-tag tag-nature">體驗</span>🐻 <strong>昭和新山熊牧場</strong>（可選）｜近距離餵食棕熊，小孩超開心｜¥1,500/大人</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">11:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🚡 <strong>有珠山纜車</strong>｜上火山口展望台，俯瞰洞爺湖 360° 全景｜¥1,800 來回/大人<br><small style="color:#666">⬇️ 山下可看 2000 年噴火後被熔岩掩埋的廢校建物（非常震撼）</small></div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:30</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>昭和新山周邊小食堂</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🏛️ <strong>洞爺湖火山科學館</strong>｜2000 年噴火歷史互動展，小孩很感興趣</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">15:30</div>
+      <div class="event-col">湖畔散步・溫泉老街小店逛逛</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">17:30</div>
+      <div class="event-col">♨️ 返回旅館泡溫泉，晚餐（旅館附餐）</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">20:45</div>
+      <div class="event-col">🎆 <strong>洞爺湖煙火</strong>（第二晚！）</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 6 ══════════════════════════════════ -->
+<div class="day-card" id="d6">
+  <div class="day-header">
+    <div class="day-num" style="background:#0891b2">Day<br>6</div>
+    <div class="day-title">
+      <h2>🐬 洞爺湖 → 小樽（全天）</h2>
+      <div class="day-meta">8/5（三）・小樽住宿一晚</div>
+    </div>
+  </div>
+  <div class="day-transport">🚗 <strong>自駕</strong>｜洞爺湖 → 小樽 約 110 分</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">08:00</div>
+      <div class="event-col">旅館早餐，退房</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">08:30</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往小樽（道央自動車道）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:30</div>
+      <div class="event-col">抵達小樽，停車</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">10:45</div>
+      <div class="event-col"><span class="event-tag tag-nature">水族館</span>🐬 <strong>小樽水族館</strong>（09:00 開館）｜海豚・海豹・海獺秀，今天不趕路，可以慢慢逛！｜¥1,800/大人・¥700/小學生</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:00</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>🍣 「政寿司」正統小樽壽司，或回転「番屋」</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:15</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🛶 <strong>小樽運河</strong>｜散步拍照，倉庫群打卡</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">15:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">逛街</span>🪟 <strong>北一硝子</strong>｜玻璃工藝，挑選紀念品</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">15:45</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🎵 <strong>小樽オルゴール堂</strong>｜音樂盒博物館，小孩喜歡</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">16:30</div>
+      <div class="event-col"><span class="event-tag tag-food">購物</span>🧀 <strong>堺町通り</strong>｜LeTAO 起司蛋糕本店（必吃！雙層起司蛋糕）・六花亭・自由逛街</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:00</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>飯店 Check-in</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">18:30</div>
+      <div class="event-col">🌅 <strong>運河黃昏・煤氣燈點燈</strong>｜傍晚運河最美，飯後必散步</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">19:30</div>
+      <div class="event-col"><span class="event-tag tag-food">晚餐</span>🍣 小樽海鮮居酒屋，悠閒收尾</div>
+    </div>
+  </div>
+  <div class="hotel-block">
+    <div class="hotel-title">🏨 住宿｜小樽（1晚）</div>
+    ドーミーイン小樽 / Vessel Hotel Campana Otaru（運河旁，景觀佳）/ 小樽朝里クラッセホテル
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">🧀 LeTAO 必吃</div>
+    堺町通り本店的雙層起司蛋糕需當天食用，無法帶回台灣。另有可常溫保存的版本可帶回當伴手禮。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 7 ══════════════════════════════════ -->
+<div class="day-card" id="d7">
+  <div class="day-header">
+    <div class="day-num" style="background:#16a34a">Day<br>7</div>
+    <div class="day-title">
+      <h2>🦁 小樽 → 旭山動物園 → 層雲峽</h2>
+      <div class="day-meta">8/6（四）・大雪山國家公園</div>
+    </div>
+  </div>
+  <div class="day-transport">🚗 <strong>自駕</strong>｜小樽 → 旭川 約 150 分 / 旭山動物園 → 層雲峽 約 80 分</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">07:30</div>
+      <div class="event-col">飯店早餐，退房</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">08:00</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往旭川（約 150 分）⚠️ 今天開車多，早出發很重要</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">09:30</div>
+      <div class="event-col"><span class="event-tag tag-nature">動物園</span>🦁 <strong>旭山動物園</strong>（09:30 開園，剛好抵達）｜企鵝水中隧道・北極熊圓柱水槽・猩猩吊橋，日本最有創意的動物園！</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:30</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>動物園內餐廳</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:30</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往層雲峽（大雪山國家公園，約 80 分）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">15:00</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>抵達層雲峽，飯店 Check-in・行李放好</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">15:30</div>
+      <div class="event-col"><span class="event-tag tag-nature">國家公園</span>🚡 <strong>層雲峽纜車（黑岳ロープウェイ）</strong>→ 7合目，再搭リフト → 8合目展望台｜¥2,000 來回/大人<br><small style="color:#16a34a">夏季高山花卉盛開，視野壯觀。有 8 歲小孩建議在 8 合目欣賞即可。</small></div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">17:00</div>
+      <div class="event-col">下山，返回飯店，♨️ 泡溫泉</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:30</div>
+      <div class="event-col"><span class="event-tag tag-food">晚餐</span>層雲峽飯店附餐（通常含）或峽谷小餐廳</div>
+    </div>
+  </div>
+  <div class="hotel-block">
+    <div class="hotel-title">🏨 住宿｜層雲峽溫泉（1晚）</div>
+    層雲峽観光ホテル / 朝陽リゾートホテル（溫泉＋星空視野）
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">⚠️ 注意事項</div>
+    今天總開車時間約 230 分，08:00 出發才能在動物園開園時抵達。層雲峽帶薄外套。若纜車停開（大霧/強風），可改走銀河・流星瀑布步道（明天也有安排）。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 8 ══════════════════════════════════ -->
+<div class="day-card" id="d8">
+  <div class="day-header">
+    <div class="day-num" style="background:#ca8a04">Day<br>8</div>
+    <div class="day-title">
+      <h2>🏔️ 大雪山瀑布 → 美瑛</h2>
+      <div class="day-meta">8/7（五）・層雲峽 → 美瑛</div>
+    </div>
+  </div>
+  <div class="day-transport">🚗 <strong>自駕</strong>｜層雲峽 → 美瑛 約 90 分</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">07:00</div>
+      <div class="event-col">旅館早餐（早點出發，景點少人）</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">08:00</div>
+      <div class="event-col"><span class="event-tag tag-nature">景點</span>🌊 <strong>銀河・流星の滝</strong>｜層雲峽著名雙瀑布，步道平坦，小孩完全沒問題，壯觀！（開車 5 分）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">09:00</div>
+      <div class="event-col"><span class="event-tag tag-nature">健行</span>🏔️ 層雲峽周邊短程步道（可選）｜平緩路線，適合親子</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:00</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往美瑛（約 90 分）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">11:30</div>
+      <div class="event-col">抵達美瑛</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">11:45</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>💙 <strong>青い池（青池）</strong>｜神祕藍色池水，美瑛最著名景點｜停車場 ¥500<br><small style="color:#1e40af">上午光線最美，人也最少！</small></div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">13:00</div>
+      <div class="event-col"><span class="event-tag tag-nature">景點</span>🌸 <strong>四季彩の丘</strong>｜丘陵彩帶花田，可租拖拉機巡遊（¥500/人）｜入園免費</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">14:00</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>美瑛「Bi.blé」麵包餐廳，或附近農場餐廳，當地食材</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">15:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🌲 <strong>拼布之路（パッチワークの路）</strong>｜開車緩行，麥田・玉米田如拼布，沿途停車拍照</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">15:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🌳 Ken & Mary 之樹・親木之路等農場地標</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">17:00</div>
+      <div class="event-col"><span class="event-tag tag-food">購物</span>🌽 <strong>美瑛選果</strong>｜當地農產精選，哈密瓜・甜玉米・北海道薯條｜北海道玉米超甜，必買！</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:00</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>飯店 Check-in，晚餐</div>
+    </div>
+  </div>
+  <div class="hotel-block">
+    <div class="hotel-title">🏨 住宿｜美瑛（1晚）</div>
+    Biei Potato Village / 白金温泉旅館 / 丘のくら
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">🌙 夜間加分選項</div>
+    青池夏季開放夜間打燈（日落後到 21:00），若精力充沛可晚上再回去看夜景，非常美麗！
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 9 ══════════════════════════════════ -->
+<div class="day-card" id="d9">
+  <div class="day-header">
+    <div class="day-num" style="background:#7c3aed">Day<br>9</div>
+    <div class="day-title">
+      <h2>💜 美瑛 → 富良野 → Outlet → 札幌・還車</h2>
+      <div class="day-meta">8/8（六）・薰衣草田＋購物＋返回札幌</div>
+    </div>
+  </div>
+  <div class="day-transport">🚗 <strong>自駕</strong>｜美瑛 → 富良野 約 30 分 / 富良野 → 三井Outlet北広島 約 90 分 / Outlet → 札幌 約 20 分</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">08:00</div>
+      <div class="event-col">退房，出發往富良野</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">09:00</div>
+      <div class="event-col"><span class="event-tag tag-nature">景點</span>💜 <strong>Farm Tomita</strong>｜北海道最著名薰衣草農場｜入園免費<br><small style="color:#666">8月初薰衣草或已過盛期，但混合花田（向日葵・粉黛亂子草等）仍美</small></div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:00</div>
+      <div class="event-col">🍦 薰衣草霜淇淋・薰衣草相關商品採購</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">景點</span>🧀 <strong>富良野チーズ工房</strong>｜起司工廠參觀，可購買起司・奶油</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">11:30</div>
+      <div class="event-col"><span class="event-tag tag-sight">逛街</span>🌲 <strong>ニングルテラス</strong>｜森林中的手工藝品小屋群，伴手禮</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:30</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>🍛 <strong>唯我独尊（ゆいがどくそん）</strong>｜富良野老店，北海道野菜咖哩</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:30</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往三井アウトレットパーク 札幌北広島（道央自動車道，約 90 分）</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">15:00</div>
+      <div class="event-col"><span class="event-tag tag-sight">逛街</span>🛍️ <strong>三井アウトレットパーク 札幌北広島</strong>｜Coach・Nike・Adidas 等品牌，就在富良野→札幌路上，完全不繞路！購物約 1.5h</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">16:30</div>
+      <div class="event-col"><span class="event-tag tag-move">出發</span>往札幌市區（約 20 分）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">17:00</div>
+      <div class="event-col"><span class="event-tag tag-move">還車</span>🚗 <strong>租車還車</strong>（記得加滿油再還，辦理退車約 20 分鐘）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">18:00</div>
+      <div class="event-col"><span class="event-tag tag-hotel">住宿</span>飯店 Check-in</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">19:00</div>
+      <div class="event-col"><span class="event-tag tag-food">晚餐</span>🍜 <strong>最後晚餐</strong>｜「一幻」蝦味噌拉麵 或 「根室花まる」壽司</div>
+    </div>
+  </div>
+  <div class="hotel-block">
+    <div class="hotel-title">🏨 住宿｜札幌（1晚，靠近 JR 線）</div>
+    Art Hotel 札幌 / Quintessa Hotel 札幌 / JR Inn 札幌
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">🛍️ Outlet 小提醒</div>
+    三井アウトレットパーク 札幌北広島就在北広島 IC 旁，從富良野走道央道回札幌必經，完全順路。這裡也是 ES CON Field 附近，路況熟悉。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ DAY 10 ══════════════════════════════════ -->
+<div class="day-card" id="d10">
+  <div class="day-header">
+    <div class="day-num" style="background:#6b7280">Day<br>10</div>
+    <div class="day-title">
+      <h2>✈️ 回程・新千歲出發</h2>
+      <div class="day-meta">8/9（日）・15:00 出發</div>
+    </div>
+  </div>
+  <div class="day-transport">🚃 <strong>JR 快速エアポート</strong>｜札幌 → 新千歲 約 37 分（指定席）</div>
+  <div class="schedule">
+    <div class="schedule-row">
+      <div class="time-col">09:00</div>
+      <div class="event-col">飯店早餐・最後打包</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:00</div>
+      <div class="event-col">退房，前往札幌站</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">10:30</div>
+      <div class="event-col"><span class="event-tag tag-move">交通</span>搭 JR 快速エアポート → 新千歲（指定席提前買好）</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">11:10</div>
+      <div class="event-col">抵達新千歲機場</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">11:15</div>
+      <div class="event-col"><span class="event-tag tag-sight">購物</span>🛍️ <strong>新千歲機場掃貨</strong>｜白色戀人・六花亭・ROYCE'・三方六・どさんこプラザ</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">12:30</div>
+      <div class="event-col"><span class="event-tag tag-food">午餐</span>機場 2F 拉麵道場・海鮮丼</div>
+    </div>
+    <div class="schedule-row">
+      <div class="time-col">13:30</div>
+      <div class="event-col">前往登機口，辦理出境</div>
+    </div>
+    <div class="schedule-row highlight-row">
+      <div class="time-col">15:00</div>
+      <div class="event-col">✈️ <strong>出發回台灣！</strong></div>
+    </div>
+  </div>
+  <div class="tips-box">
+    <div class="tips-title">🛍️ 機場購物建議</div>
+    新千歲機場 2F 有「北海道どさんこプラザ」匯整北海道所有名物，是最後補買的好機會。白色戀人限量口味建議在機場買（比外面有些口味限定）。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ SUMMARY ══════════════════════════════════ -->
+<div id="summary">
+
+<div class="section-title">🏨 住宿總覽</div>
+<table>
+  <thead><tr><th>日期</th><th>地點</th><th>晚數</th><th>建議旅館</th></tr></thead>
+  <tbody>
+    <tr><td>7/31・8/1・8/2</td><td>札幌</td><td>3晚</td><td>JR Inn / Cross Hotel / Richmond</td></tr>
+    <tr><td>8/3・8/4</td><td>洞爺湖溫泉</td><td>2晚</td><td>湖畔亭 / 望羊蹄 / Toya Manseikaku</td></tr>
+    <tr><td>8/5</td><td>小樽</td><td>1晚</td><td>ドーミーイン小樽 / Vessel Hotel Campana Otaru</td></tr>
+    <tr><td>8/6</td><td>層雲峽溫泉</td><td>1晚</td><td>層雲峽観光ホテル / 朝陽リゾートホテル</td></tr>
+    <tr><td>8/7</td><td>美瑛</td><td>1晚</td><td>Biei Potato Village / 白金温泉旅館</td></tr>
+    <tr><td>8/8</td><td>札幌</td><td>1晚</td><td>Art Hotel / JR Inn 札幌</td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">🎡 主題設施</div>
+<table>
+  <thead><tr><th>類型</th><th>設施</th><th>日期</th><th>費用參考</th></tr></thead>
+  <tbody>
+    <tr><td>🐻 動物園</td><td>圓山動物園（札幌）</td><td>8/2</td><td>¥600/大人・¥300/小孩</td></tr>
+    <tr><td>🦁 動物園</td><td>旭山動物園（旭川）</td><td>8/6</td><td>¥1,000/大人・免費/小學生</td></tr>
+    <tr><td>🐬 水族館</td><td>小樽水族館</td><td>8/5</td><td>¥1,800/大人・¥700/小學生</td></tr>
+    <tr><td>🏞️ 國家公園</td><td>支笏洞爺（支笏湖）</td><td>8/3</td><td>獨木舟¥5,000–7,000/人</td></tr>
+    <tr><td>🏔️ 國家公園</td><td>大雪山（層雲峽）</td><td>8/6–8/7</td><td>纜車¥2,000/大人</td></tr>
+    <tr><td>⚾ 球場</td><td>ES CON Field</td><td>8/1（已預訂）</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">⚠️ 重要注意事項</div>
+<div class="warn-grid">
+  <div class="warn-card">
+    <div class="warn-num">①</div>
+    <p><strong>支笏湖獨木舟</strong><br>夏季快滿，出發前 2–3 週務必預約</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">②</div>
+    <p><strong>台灣駕照</strong><br>需附日文翻譯本（非國際駕照），在台辦理</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">③</div>
+    <p><strong>層雲峽纜車</strong><br>天氣不好時停開，行程需彈性備案</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">④</div>
+    <p><strong>日本 eSIM</strong><br>提前買好，全程靠 Google Maps 導航</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">⑤</div>
+    <p><strong>Farm Tomita</strong><br>薰衣草盛期為 7 月中，8 月上旬可能已凋</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">⑥</div>
+    <p><strong>JR 指定席</strong><br>新千歲↔札幌・旺季提前購票</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">⑦</div>
+    <p><strong>洞爺湖煙火</strong><br>每晚 20:45，住湖畔旅館才能輕鬆欣賞</p>
+  </div>
+  <div class="warn-card">
+    <div class="warn-num">⑧</div>
+    <p><strong>旭山動物園</strong><br>旺季 8 月開到 17:15，建議 09:30 入園</p>
+  </div>
+</div>
+
+<div class="section-title">💰 費用概估（2大1小）</div>
+<table class="cost-table">
+  <thead><tr><th>項目</th><th>估算（台幣）</th></tr></thead>
+  <tbody>
+    <tr><td>住宿（10晚，含溫泉旅館）</td><td>NT$70,000–90,000</td></tr>
+    <tr><td>租車 6天（含燃油・高速）</td><td>NT$15,000–18,000</td></tr>
+    <tr><td>飲食（10天）</td><td>NT$30,000–40,000</td></tr>
+    <tr><td>門票（動物園・水族館・纜車等）</td><td>NT$10,000–13,000</td></tr>
+    <tr><td>JR・巴士交通</td><td>NT$5,000–7,000</td></tr>
+    <tr><td>購物・伴手禮</td><td>依個人預算</td></tr>
+  </tbody>
+</table>
+
+</div>
+<!-- end summary -->
+
+</div><!-- end container -->
+
+<div style="text-align:center;padding:20px;color:#9ca3af;font-size:0.78rem;">
+  北海道 2026 暑假 · 方案 B（不含函館）· 行程規劃
+</div>
+
+</body>
+</html>
